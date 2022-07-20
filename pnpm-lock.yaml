@@ -11,7 +11,6 @@ specifiers:
   '@typescript-eslint/utils': ^5.30.6
   eslint: ^8.20.0
   eslint-config-prettier: ^8.3.0
-  eslint-meetup: 'link:'
   eslint-plugin-eslint-plugin: ^4.1.0
   eslint-plugin-import: 2.25.4
   eslint-plugin-jest: ^25.3.2
@@ -29,7 +28,6 @@ dependencies:
   '@typescript-eslint/parser': 5.30.7_eslint@8.20.0+typescript@4.7.4
   '@typescript-eslint/scope-manager': 5.30.7
   '@typescript-eslint/utils': 5.30.7_eslint@8.20.0+typescript@4.7.4
-  eslint-meetup: 'link:'
 
 devDependencies:
   '@babel/core': 7.18.9

@@ -1,7 +1,7 @@
-import noMockWebUi from './no-mock-web-ui'
+import noEquivalentVariableName from './no-equivalent-variable-name'
 
 const allRules = {
-  'no-mock-web-ui': noMockWebUi,
+  'no-equivalent-variable-name': noEquivalentVariableName,
 }
 
 export default allRules
