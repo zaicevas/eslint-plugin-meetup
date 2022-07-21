@@ -23,7 +23,7 @@ export default createRule<Options, MessageIds>({
   },
   defaultOptions: [],
   create(context) {
-    const reportVariable = (node: TSESTree.Identifier) => {
+    const reportVariable = (node: TSESTree.FunctionDeclaration) => {
       context.report({
         messageId: 'defaultMessage',
         node,
@@ -31,7 +31,7 @@ export default createRule<Options, MessageIds>({
     }
 
     return {
-      Identifier: reportVariable,
+      FunctionDeclaration: reportVariable,
     }
   },
 })
