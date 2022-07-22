@@ -2,7 +2,7 @@ import { TSESTree, ESLintUtils } from '@typescript-eslint/utils'
 
 export const RULE_NAME = 'no-equivalent-variable-name'
 export type MessageIds = 'defaultMessage'
-export type Options = []
+export type Options = [{ reportedValues: Array<string> }]
 
 const createRule = ESLintUtils.RuleCreator(() => 'https://github.com/zaicevas/eslint-plugin-meetup')
 
@@ -18,20 +18,53 @@ export default createRule<Options, MessageIds>({
     messages: {
       defaultMessage: 'String value of the variable cannot be equivalent to variable name',
     },
-    schema: [],
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          reportedValues: {
+            type: 'array',
+          },
+        },
+      },
+    ],
     fixable: 'code',
   },
-  defaultOptions: [],
-  create(context) {
-    const reportVariable = (node: TSESTree.FunctionDeclaration) => {
+  defaultOptions: [
+    {
+      reportedValues: [],
+    },
+  ],
+  create(context, [{ reportedValues }]) {
+    const reportVariable = (node: TSESTree.VariableDeclaration) => {
+      if (node.declarations.length !== 1) return
+
+      const [declarator] = node.declarations
+
+      if (declarator.id.type !== TSESTree.AST_NODE_TYPES.Identifier) return
+
+      const variableName = declarator.id.name
+
+      if (declarator.init?.type !== TSESTree.AST_NODE_TYPES.Literal) return
+
+      const variableValue = declarator.init?.value
+
+      if (variableName !== variableValue) return
+      if (!reportedValues.includes(variableName)) return
+
       context.report({
         messageId: 'defaultMessage',
         node,
+        fix: fixer => {
+          if (!declarator?.init) return null
+
+          return fixer.replaceText(declarator.init, '""')
+        },
       })
     }
 
     return {
-      FunctionDeclaration: reportVariable,
+      VariableDeclaration: reportVariable,
     }
   },
 })

@@ -4,8 +4,8 @@ Welcome :)
 
 Checklist:
 
-- [ ] Zoom in
 - [ ] Make sure everybody can hear me
+- [ ] Zoom in
 - [ ] Presentation format (no slides)
 - [ ] I will share link to this repository
 
@@ -42,7 +42,6 @@ After the presentation you should be able to:
 ## 1. Theory
 
 * AST, [AST Explorer](https://astexplorer.net/)
-  * Source code is parsed into Abstract Syntax Tree (AST)
 * ESLint API:
   * https://eslint.org/docs/latest/developer-guide/working-with-rules
   * https://eslint.org/docs/latest/developer-guide/selectors
